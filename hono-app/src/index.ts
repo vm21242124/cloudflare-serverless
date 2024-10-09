@@ -1,6 +1,5 @@
 import { Hono } from 'hono'
 
-
 const app = new Hono()
 
 app.use(async(c,next)=>{
@@ -10,18 +9,19 @@ app.use(async(c,next)=>{
   const authtoken=c.req.header("Authorization");
   console.log(`${timeStamp} method:${method} path: ${path} auth:${authtoken}`);
   await next();
-
 })
 
 app.get('/', async(c) => {
+  console.log(typeof c);
   return c.json({
     message: 'Hello, World!',
-  
   })
 })
 
 
 app.post('/', async(c) => {
+
+  
   const body=await c.req.json();
 
   console.log(body);
